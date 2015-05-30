@@ -51,6 +51,16 @@ namespace ScratchTicket
 			// Return true for supported orientations
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
 		}
+
+		partial void OnTouchUpInside (UIButton sender)
+		{
+			UIGraphics.BeginImageContextWithOptions(scratchView.Bounds.Size, false, 0);
+			scratchView.DrawViewHierarchy(scratchView.Bounds, true);
+			var image = UIGraphics.GetImageFromCurrentImageContext();
+			UIGraphics.EndImageContext();
+	
+			// do whatever you want with the image ...
+		}
 	}
 }
 
