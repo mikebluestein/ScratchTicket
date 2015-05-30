@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel;
-using System.Drawing;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreAnimation;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 using System.IO;
 
 namespace ScratchTicket
@@ -19,8 +18,8 @@ namespace ScratchTicket
 	public class ScratchTicketView : UIView
 	{
 		CGPath path;
-		PointF initialPoint;
-		PointF latestPoint;
+		CGPoint initialPoint;
+		CGPoint latestPoint;
 		bool startNewPath = false;
 		string defaultImageFileName = "FillTexture.png";
 		string imageFileName;
@@ -107,7 +106,7 @@ namespace ScratchTicket
 			startNewPath = true;
 		}
 
-		public override void Draw (RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
 			base.Draw (rect);
 
@@ -128,7 +127,7 @@ namespace ScratchTicket
 					UIColor.Clear.SetColor ();
 
 					if (path.IsEmpty || startNewPath) {
-						path.AddLines (new PointF[] { initialPoint, latestPoint });
+						path.AddLines (new CGPoint[] { initialPoint, latestPoint });
 						startNewPath = false;
 					} else {
 						path.AddLineToPoint (latestPoint);
